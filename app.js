@@ -44,7 +44,6 @@ app.use(cors());
       console.log('reciver',recevingperson);
       if(recevingperson.length>0){
         recevingperson.forEach((m)=>{
-          console.log(m.socketid);
           io.to(m.socketid).emit('message', data);  
         })
       }
