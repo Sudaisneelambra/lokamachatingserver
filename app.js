@@ -29,19 +29,17 @@ app.use(cors());
     }
 
     array.push(one)
-    console.log(array);
 
 
     socket.on('message', (data) => {
-     const {chatdata, sender,reciver} =  data
-      postchat(chatdata, sender,reciver)
+     const {chatdata, sender,reciever} =  data
+      postchat(chatdata, sender,reciever)
       data.date = new Date()
-      data.reciever = reciver
+      data.reciever = reciever
       data.chatdata = chatdata
       const recevingperson= array.filter((e)=>{
-        return e.username == reciver
+        return e.username == reciever
       })
-      console.log('reciver',recevingperson);
       if(recevingperson.length>0){
         recevingperson.forEach((m)=>{
           io.to(m.socketid).emit('message', data);  
@@ -54,7 +52,6 @@ app.use(cors());
       const dlt= array.findIndex((m)=> m.socketid===socket.id)
       if (dlt !== -1) {
         array.splice(dlt, 1);
-        console.log('Element deleted from array');
         console.log(array);
     } else {
         console.log('Element not found in array');
